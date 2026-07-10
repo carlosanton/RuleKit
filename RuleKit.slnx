@@ -1,0 +1,8 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/RuleKit/RuleKit.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/RuleKit.Tests/RuleKit.Tests.csproj" />
+  </Folder>
+</Solution>
