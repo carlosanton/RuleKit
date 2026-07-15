@@ -61,6 +61,31 @@ public sealed class Request
 
 `null` values are considered valid. Combine `NotDefaultAttribute` with the standard `RequiredAttribute` when a value must be present and different from its default value. For example, the default value is zero for numeric types and the zero-valued member for enums. Boolean values are not supported because requiring a value different from `false` would be more clearly expressed as a specific rule that requires `true`.
 
+### DateString
+
+Validates that a string represents a real calendar date written in an exact .NET date format. Validation uses invariant culture.
+
+```csharp
+using RuleKit;
+
+public sealed class Request
+{
+    [DateString("yyyyMMdd")]
+    public string? Date { get; set; }
+}
+```
+
+Common format examples:
+
+| Format | Valid value |
+| --- | --- |
+| `yyyyMMdd` | `20260715` |
+| `yyyy-MM-dd` | `2026-07-15` |
+| `ddMMyyyy` | `15072026` |
+| `dd/MM/yyyy` | `15/07/2026` |
+
+Any standard or custom date format supported by `DateOnly` can be supplied directly. `null` values are considered valid, while empty strings, white space, mismatched formats and nonexistent calendar dates are invalid.
+
 ## License
 
 MIT
