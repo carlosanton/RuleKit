@@ -1,4 +1,8 @@
 <Solution>
+  <Folder Name="/Elementos de la solución/">
+    <File Path="docs/Conventions.md" />
+    <File Path="docs/Design.md" />
+  </Folder>
   <Folder Name="/src/">
     <Project Path="src/RuleKit/RuleKit.csproj" />
   </Folder>
