@@ -7,6 +7,10 @@ namespace RuleKit
     /// <summary>
     /// Validates that an integer does not contain more than a specified number of digits.
     /// </summary>
+    /// <remarks>
+    /// The sign is not counted. <see langword="null"/> values are considered valid.
+    /// Applying this attribute to a non-integer value causes an <see cref="InvalidOperationException"/>.
+    /// </remarks>
     [AttributeUsage(AttributeTargets.Field | AttributeTargets.Parameter | AttributeTargets.Property)]
     public sealed class MaxDigitsAttribute : ValidationAttribute
     {

@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+### Added
+
+- Add `DecimalDigitsAttribute` to validate the number of integer and decimal digits in decimal values.
+
 ### Changed
 
 - Define the supported integer types and error behavior of `MaxDigitsAttribute`.
