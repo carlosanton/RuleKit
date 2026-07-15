@@ -7,6 +7,7 @@ All notable changes to this project will be documented in this file.
 ### Added
 
 - Add `DecimalDigitsAttribute` to validate the number of integer and decimal digits in decimal values.
+- Add `NotDefaultAttribute` to reject default values of value types.
 
 ### Changed
 

@@ -45,6 +45,22 @@ public sealed class Request
 
 In this example, the value may contain up to 11 integer digits and 2 decimal digits. A value such as `1.2300` is invalid because it contains 4 decimal digits.
 
+### NotDefault
+
+Validates that a value type does not contain its default value. It can be used with built-in value types, enums and custom structs.
+
+```csharp
+using RuleKit;
+
+public sealed class Request
+{
+    [NotDefault]
+    public Guid? Identifier { get; set; }
+}
+```
+
+`null` values are considered valid. Combine `NotDefaultAttribute` with the standard `RequiredAttribute` when a value must be present and different from its default value. For example, the default value is zero for numeric types and the zero-valued member for enums. Boolean values are not supported because requiring a value different from `false` would be more clearly expressed as a specific rule that requires `true`.
+
 ## License
 
 MIT
