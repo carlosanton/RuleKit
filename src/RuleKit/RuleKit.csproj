@@ -8,10 +8,13 @@
 		<Title>RuleKit</Title>
 		<Description>A lightweight .NET library that extends DataAnnotations with reusable validation rules.</Description>
 		<Authors>Carlos Antón</Authors>
+		<VersionPrefix>0.1.0</VersionPrefix>
+		<VersionSuffix>alpha.1</VersionSuffix>
 
 		<PackageId>RuleKit</PackageId>
 		<PackageTags>validation;dataannotations;attributes;dotnet</PackageTags>
 		<PackageLicenseExpression>MIT</PackageLicenseExpression>
+		<PackageReadmeFile>README.md</PackageReadmeFile>
 		<PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
 
 		<RepositoryUrl>https://github.com/carlosanton/RuleKit</RepositoryUrl>
@@ -24,6 +27,10 @@
 		<AnalysisLevel>latest</AnalysisLevel>
 		<EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
 	</PropertyGroup>
+
+	<ItemGroup>
+	  <None Include="..\..\README.md" Pack="true" PackagePath="\" />
+	</ItemGroup>
 
 	<ItemGroup>
 	  <Folder Include="Attributes\Dates\" />

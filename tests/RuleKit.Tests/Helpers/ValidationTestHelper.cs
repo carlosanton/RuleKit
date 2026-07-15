@@ -14,11 +14,7 @@ namespace RuleKit.Tests.Helpers
             var validationResults = new List<ValidationResult>();
             var validationContext = new ValidationContext(instance);
 
-            Validator.TryValidateObject(
-                instance,
-                validationContext,
-                validationResults,
-                true);
+            Validator.TryValidateObject(instance, validationContext, validationResults, true);
 
             return validationResults;
         }
