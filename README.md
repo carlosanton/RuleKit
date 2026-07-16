@@ -135,6 +135,31 @@ public string? VehicleIdentifier { get; set; }
 
 The condition property and expected value must have the same type, although `T` and `T?` are considered compatible. The expected value must also be valid as a C# attribute argument. Primitive values accepted by C#, strings and enums are supported directly; values such as `decimal`, `Guid` and `DateTime` cannot be written directly as attribute arguments.
 
+### EmailDomain
+
+Validates that a string is an email address whose domain is included in a configured list.
+
+```csharp
+using RuleKit;
+
+public sealed class Request
+{
+    [EmailDomain("empresa.com", "empresa.es")]
+    public string? Email { get; set; }
+}
+```
+
+Domain comparisons ignore differences between uppercase and lowercase characters. Subdomains are rejected by default, but they can be included individually in the domain list or enabled for every configured domain:
+
+```csharp
+[EmailDomain("empresa.com", AllowSubdomains = true)]
+public string? CorporateEmail { get; set; }
+```
+
+In this example, both `user@empresa.com` and `user@sales.empresa.com` are valid. A domain that merely shares the same suffix, such as `user@falseempresa.com`, remains invalid.
+
+The general email format is validated using the standard `EmailAddressAttribute`. `null` values are considered valid, while empty strings and values with surrounding spaces are invalid. Configured domains must use ASCII domain names; internationalized domains are not supported yet.
+
 ## License
 
 MIT

@@ -11,6 +11,7 @@ All notable changes to this project will be documented in this file.
 - Add `DateStringAttribute` to validate date strings using an exact .NET date format.
 - Add property comparison attributes for greater-than and less-than relationships, including their inclusive variants.
 - Add `RequiredIfAttribute` with optional case-insensitive and diacritic-insensitive string conditions.
+- Add `EmailDomainAttribute` to restrict email addresses to one or more domains, with optional subdomain support.
 
 ### Changed
 
