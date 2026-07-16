@@ -106,6 +106,35 @@ Declare each relationship on only one of its properties to avoid returning two e
 
 If either value is `null`, validation succeeds. Use the standard `RequiredAttribute` independently when either property must contain a value. Missing properties, incompatible types and types that do not implement `IComparable` are treated as developer errors.
 
+### RequiredIf
+
+Makes a property required when another property contains a specified value.
+
+```csharp
+using RuleKit;
+
+public sealed class Request
+{
+    public bool WantsInvoice { get; set; }
+
+    [RequiredIf(nameof(WantsInvoice), true)]
+    public string? TaxIdentifier { get; set; }
+}
+```
+
+When `WantsInvoice` is `true`, `TaxIdentifier` follows the same rules as the standard `RequiredAttribute`. When the condition is not met, `TaxIdentifier` is not required.
+
+String conditions use exact ordinal equality by default. Case and diacritical differences can be ignored explicitly:
+
+```csharp
+[RequiredIf(nameof(VehicleType), "camión", IgnoreCase = true, IgnoreDiacritics = true)]
+public string? VehicleIdentifier { get; set; }
+```
+
+`IgnoreCase` and `IgnoreDiacritics` use invariant culture and never modify the received value. `AllowEmptyStrings` is also available and behaves like the property with the same name on `RequiredAttribute`.
+
+The condition property and expected value must have the same type, although `T` and `T?` are considered compatible. The expected value must also be valid as a C# attribute argument. Primitive values accepted by C#, strings and enums are supported directly; values such as `decimal`, `Guid` and `DateTime` cannot be written directly as attribute arguments.
+
 ## License
 
 MIT
