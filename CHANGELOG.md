@@ -9,6 +9,7 @@ All notable changes to this project will be documented in this file.
 - Add `DecimalDigitsAttribute` to validate the number of integer and decimal digits in decimal values.
 - Add `NotDefaultAttribute` to reject default values of value types.
 - Add `DateStringAttribute` to validate date strings using an exact .NET date format.
+- Add property comparison attributes for greater-than and less-than relationships, including their inclusive variants.
 
 ### Changed
 

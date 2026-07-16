@@ -86,6 +86,26 @@ Common format examples:
 
 Any standard or custom date format supported by `DateOnly` can be supplied directly. `null` values are considered valid, while empty strings, white space, mismatched formats and nonexistent calendar dates are invalid.
 
+### Property comparisons
+
+Validates the order between two properties on the same object. The available attributes are `GreaterThan`, `GreaterThanOrEqualTo`, `LessThan` and `LessThanOrEqualTo`.
+
+```csharp
+using RuleKit;
+
+public sealed class Request
+{
+    public DateOnly? StartDate { get; set; }
+
+    [GreaterThanOrEqualTo(nameof(StartDate))]
+    public DateOnly? EndDate { get; set; }
+}
+```
+
+Declare each relationship on only one of its properties to avoid returning two errors for the same invalid pair. Both properties must use the same type, although `T` and `T?` are considered compatible. Strings and Boolean values are not supported.
+
+If either value is `null`, validation succeeds. Use the standard `RequiredAttribute` independently when either property must contain a value. Missing properties, incompatible types and types that do not implement `IComparable` are treated as developer errors.
+
 ## License
 
 MIT
