@@ -4,12 +4,47 @@ A lightweight .NET library that extends DataAnnotations with reusable validation
 
 > 🚧 This project is under development.
 
+## Installation
+
+RuleKit currently targets .NET 10. Install the latest alpha explicitly from NuGet:
+
+```bash
+dotnet package add RuleKit --version 0.1.0-alpha.1
+```
+
+Prerelease versions are intended for early use and feedback. The public API may still change before `1.0.0`.
+
 ## Goals
 
 - Extend .NET DataAnnotations with reusable validation rules.
 - Keep a clean and intuitive API.
 - Be fully unit tested.
 - Be easy to integrate into any .NET project.
+
+## Usage
+
+RuleKit attributes work with the standard DataAnnotations validation APIs and with frameworks that use them, such as ASP.NET Core model validation.
+
+```csharp
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using RuleKit;
+
+public sealed class Request
+{
+    [Required]
+    [MaxDigits(5)]
+    public int? Code { get; set; }
+}
+
+var request = new Request { Code = 123456 };
+var results = new List<ValidationResult>();
+var context = new ValidationContext(request);
+
+var isValid = Validator.TryValidateObject(request, context, results, true);
+```
+
+Unless documented otherwise, RuleKit attributes consider `null` values valid. Use the standard `RequiredAttribute` when a value must be present.
 
 ## Available attributes
 
@@ -160,6 +195,10 @@ In this example, both `user@empresa.com` and `user@sales.empresa.com` are valid.
 
 The general email format is validated using the standard `EmailAddressAttribute`. `null` values are considered valid, while empty strings and values with surrounding spaces are invalid. Configured domains must use ASCII domain names; internationalized domains are not supported yet.
 
+## Feedback
+
+Bug reports and feature proposals are welcome in [GitHub Issues](https://github.com/carlosanton/RuleKit/issues).
+
 ## License
 
-MIT
+RuleKit is available under the [MIT License](https://github.com/carlosanton/RuleKit/blob/master/LICENSE.txt).

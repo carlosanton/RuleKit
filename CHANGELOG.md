@@ -4,6 +4,8 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## [0.1.0-alpha.1] - 2026-07-18
+
 ### Added
 
 - Add `DecimalDigitsAttribute` to validate the number of integer and decimal digits in decimal values.

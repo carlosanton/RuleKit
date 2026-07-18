@@ -13,15 +13,21 @@
 
 		<PackageId>RuleKit</PackageId>
 		<PackageTags>validation;dataannotations;attributes;dotnet</PackageTags>
+		<PackageProjectUrl>https://github.com/carlosanton/RuleKit</PackageProjectUrl>
 		<PackageLicenseExpression>MIT</PackageLicenseExpression>
 		<PackageReadmeFile>README.md</PackageReadmeFile>
 		<PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+		<Copyright>Copyright © 2026 Carlos Antón</Copyright>
 
 		<RepositoryUrl>https://github.com/carlosanton/RuleKit</RepositoryUrl>
 		<RepositoryType>git</RepositoryType>
+		<PublishRepositoryUrl>true</PublishRepositoryUrl>
 
 		<GenerateDocumentationFile>true</GenerateDocumentationFile>
 		<IsPackable>true</IsPackable>
+		<IncludeSymbols>true</IncludeSymbols>
+		<SymbolPackageFormat>snupkg</SymbolPackageFormat>
+		<EnablePackageValidation>true</EnablePackageValidation>
 
 		<TreatWarningsAsErrors>true</TreatWarningsAsErrors>
 		<AnalysisLevel>latest</AnalysisLevel>
@@ -29,17 +35,7 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-	  <None Include="..\..\README.md" Pack="true" PackagePath="\" />
-	</ItemGroup>
-
-	<ItemGroup>
-	  <Folder Include="Attributes\Dates\" />
-	  <Folder Include="Attributes\Collections\" />
-	  <Folder Include="Attributes\Catalogs\" />
-	  <Folder Include="Attributes\Strings\" />
-	  <Folder Include="Common\" />
-	  <Folder Include="Results\" />
-	  <Folder Include="Resources\" />
+		<None Include="..\..\README.md" Pack="true" PackagePath="\" />
 	</ItemGroup>
 
 </Project>
