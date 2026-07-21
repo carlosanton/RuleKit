@@ -1,0 +1,79 @@
+name: Publish to NuGet
+
+on:
+  release:
+    types:
+      - published
+
+permissions:
+  contents: read
+
+jobs:
+  publish:
+    name: Publish approved release
+    if: startsWith(github.event.release.tag_name, 'v')
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    environment: nuget
+    permissions:
+      contents: read
+      id-token: write
+
+    steps:
+      - name: Check out released version
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+          ref: ${{ github.event.release.tag_name }}
+
+      - name: Verify release source
+        shell: bash
+        run: |
+          git fetch --no-tags origin master:refs/remotes/origin/master
+          git merge-base --is-ancestor HEAD refs/remotes/origin/master
+
+      - name: Read version from tag
+        shell: bash
+        env:
+          RELEASE_TAG: ${{ github.event.release.tag_name }}
+        run: |
+          version="${RELEASE_TAG#v}"
+
+          if [[ ! "$version" =~ ^[0-9]+\.[0-9]+\.[0-9]+([-.][0-9A-Za-z.-]+)?$ ]]; then
+            echo "The release tag does not contain a valid package version: $RELEASE_TAG"
+            exit 1
+          fi
+
+          echo "PACKAGE_VERSION=$version" >> "$GITHUB_ENV"
+
+      - name: Set up .NET
+        uses: actions/setup-dotnet@67a3573c9a986a3f9c594539f4ab511d57bb3ce9 # v4
+        with:
+          dotnet-version: 10.0.x
+
+      - name: Restore dependencies
+        run: dotnet restore RuleKit.slnx --locked-mode
+
+      - name: Verify formatting
+        run: dotnet format RuleKit.slnx --verify-no-changes --no-restore
+
+      - name: Build
+        run: dotnet build RuleKit.slnx --configuration Release --no-restore
+
+      - name: Test
+        run: dotnet test RuleKit.slnx --configuration Release --no-build
+
+      - name: Pack
+        run: dotnet pack src/RuleKit/RuleKit.csproj --configuration Release --no-build --output artifacts -p:Version="$PACKAGE_VERSION"
+
+      - name: Request temporary NuGet credential
+        id: nuget-login
+        uses: NuGet/login@ebc737b6fc418a6ca0073cf116ec8dc156d8b81e # v1
+        with:
+          user: Krlitos877
+
+      - name: Publish package
+        env:
+          NUGET_API_KEY: ${{ steps.nuget-login.outputs.NUGET_API_KEY }}
+        run: dotnet nuget push "artifacts/RuleKit.$PACKAGE_VERSION.nupkg" --api-key "$NUGET_API_KEY" --source https://api.nuget.org/v3/index.json --skip-duplicate

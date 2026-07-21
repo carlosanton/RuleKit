@@ -46,6 +46,8 @@ var isValid = Validator.TryValidateObject(request, context, results, true);
 
 Unless documented otherwise, RuleKit attributes consider `null` values valid. Use the standard `RequiredAttribute` when a value must be present.
 
+Validation attributes enforce declared application rules. They do not replace authentication, authorization, output encoding, parameterized database access or other application security controls.
+
 ## Available attributes
 
 ### MaxDigits
@@ -198,6 +200,8 @@ The general email format is validated using the standard `EmailAddressAttribute`
 ## Feedback
 
 Bug reports and feature proposals are welcome in [GitHub Issues](https://github.com/carlosanton/RuleKit/issues).
+
+Potential security vulnerabilities should be reported privately according to the [security policy](https://github.com/carlosanton/RuleKit/security/policy).
 
 ## License
 
