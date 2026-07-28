@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+### Added
+
+- Add `UniqueItemsAttribute` to reject duplicate collection items, with optional case-insensitive and diacritic-insensitive string comparison.
+
 ## [0.1.0-alpha.1] - 2026-07-18
 
 ### Added

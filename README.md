@@ -197,6 +197,29 @@ In this example, both `user@empresa.com` and `user@sales.empresa.com` are valid.
 
 The general email format is validated using the standard `EmailAddressAttribute`. `null` values are considered valid, while empty strings and values with surrounding spaces are invalid. Configured domains must use ASCII domain names; internationalized domains are not supported yet.
 
+### UniqueItems
+
+Validates that a collection does not contain duplicate items.
+
+```csharp
+using RuleKit;
+
+public sealed class Request
+{
+    [UniqueItems]
+    public IReadOnlyCollection<int>? ProductIds { get; set; }
+}
+```
+
+Items use their standard .NET equality rules by default. String collections can ignore differences in casing or diacritical marks explicitly:
+
+```csharp
+[UniqueItems(IgnoreCase = true, IgnoreDiacritics = true)]
+public IReadOnlyCollection<string>? Tags { get; set; }
+```
+
+In this example, `"CAMIÓN"` and `"camion"` are considered duplicates. `null` and empty collections are valid; use the standard `RequiredAttribute` and collection length attributes when presence or size must also be validated. Repeated `null` items are considered duplicates.
+
 ## Feedback
 
 Bug reports and feature proposals are welcome in [GitHub Issues](https://github.com/carlosanton/RuleKit/issues).
