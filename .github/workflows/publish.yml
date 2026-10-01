@@ -18,6 +18,7 @@ jobs:
     permissions:
       contents: read
       id-token: write
+      attestations: write
 
     steps:
       - name: Check out released version
@@ -55,6 +56,15 @@ jobs:
       - name: Restore dependencies
         run: dotnet restore RuleKit.slnx --locked-mode
 
+      - name: Verify project version matches tag
+        shell: bash
+        run: |
+          project_version=$(dotnet msbuild src/RuleKit/RuleKit.csproj -getProperty:Version)
+          if [[ "$project_version" != "$PACKAGE_VERSION" ]]; then
+            echo "Project version $project_version does not match release version $PACKAGE_VERSION."
+            exit 1
+          fi
+
       - name: Verify formatting
         run: dotnet format RuleKit.slnx --verify-no-changes --no-restore
 
@@ -65,7 +75,21 @@ jobs:
         run: dotnet test RuleKit.slnx --configuration Release --no-build
 
       - name: Pack
-        run: dotnet pack src/RuleKit/RuleKit.csproj --configuration Release --no-build --output artifacts -p:Version="$PACKAGE_VERSION"
+        run: dotnet pack src/RuleKit/RuleKit.csproj --configuration Release --no-build --output artifacts
+
+      - name: Attest package provenance
+        uses: actions/attest@1e69f48acb82d1966a394da916b4c1698aa569d6 # v4
+        with:
+          subject-path: artifacts/*.*nupkg
+          create-storage-record: false
+
+      - name: Retain attested packages
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: rulekit-release-packages
+          path: artifacts/*.*nupkg
+          if-no-files-found: error
+          retention-days: 90
 
       - name: Request temporary NuGet credential
         id: nuget-login

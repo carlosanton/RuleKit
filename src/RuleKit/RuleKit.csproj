@@ -8,8 +8,7 @@
 		<Title>RuleKit</Title>
 		<Description>A lightweight .NET library that extends DataAnnotations with reusable validation rules.</Description>
 		<Authors>Carlos Antón</Authors>
-		<VersionPrefix>0.1.0</VersionPrefix>
-		<VersionSuffix>alpha.1</VersionSuffix>
+		<VersionPrefix>1.0.0</VersionPrefix>
 
 		<PackageId>RuleKit</PackageId>
 		<PackageTags>validation;dataannotations;attributes;dotnet</PackageTags>
@@ -28,6 +27,7 @@
 		<IncludeSymbols>true</IncludeSymbols>
 		<SymbolPackageFormat>snupkg</SymbolPackageFormat>
 		<EnablePackageValidation>true</EnablePackageValidation>
+		<PackageValidationBaselineVersion>0.1.0-alpha.1</PackageValidationBaselineVersion>
 
 		<TreatWarningsAsErrors>true</TreatWarningsAsErrors>
 		<AnalysisLevel>latest</AnalysisLevel>

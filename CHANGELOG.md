@@ -4,9 +4,17 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## [1.0.0] - 2026-10-01
+
 ### Added
 
 - Add `UniqueItemsAttribute` to reject duplicate collection items, with optional case-insensitive and diacritic-insensitive string comparison.
+
+### Changed
+
+- Release the existing validation attributes as the first stable public API for .NET 10.
+- Validate package compatibility against `0.1.0-alpha.1` during packaging.
+- Publish build provenance attestations and retain the original packages as GitHub Actions artifacts.
 
 ## [0.1.0-alpha.1] - 2026-07-18
 

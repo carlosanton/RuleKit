@@ -2,17 +2,17 @@
 
 A lightweight .NET library that extends DataAnnotations with reusable validation rules.
 
-> 🚧 This project is under development.
+Reusable validation attributes for .NET 10, with no external runtime dependencies.
 
 ## Installation
 
-RuleKit currently targets .NET 10. Install the latest alpha explicitly from NuGet:
+RuleKit targets .NET 10:
 
 ```bash
-dotnet package add RuleKit --version 0.1.0-alpha.1
+dotnet package add RuleKit --version 1.0.0
 ```
 
-Prerelease versions are intended for early use and feedback. The public API may still change before `1.0.0`.
+Starting with `1.0.0`, backwards-incompatible public API changes require a new major version.
 
 ## Goals
 
