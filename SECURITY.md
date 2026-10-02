@@ -14,9 +14,11 @@ The report will be reviewed privately. If the issue is confirmed, a fix and a co
 
 ## Package integrity
 
-Dependencies are locked and audited during every build. GitHub also performs CodeQL analysis, dependency monitoring, malware alerts and secret scanning.
+Dependencies are locked and audited during CI and release builds. Dependabot checks for dependency updates weekly. Repository administrators should regularly review GitHub code scanning, dependency and secret-scanning alerts and verify that the relevant protections remain enabled.
 
 NuGet packages are built from a version tag by GitHub Actions and published through NuGet Trusted Publishing. Publication uses a temporary credential and requires manual approval; no permanent NuGet API key is stored in the repository.
+
+Release builds generate provenance attestations for the original packages and retain them as workflow artifacts for 90 days. See [Releasing RuleKit](docs/Releasing.md) for verification instructions. Provenance identifies a build's origin; it does not certify that the code is free of vulnerabilities.
 
 ## Validation scope
 
